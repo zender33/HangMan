@@ -12,8 +12,11 @@ class PoleDrawing:
             "|      | "
         ]
 
-    def display(self, text, width=117, padding=8):
-            print(' ' * padding + '*' + text.center(width, ' ') + '*')
+    def display(self, text, width=117, padding=8, reps=1):
+
+        for i in range(reps):
+            text_display = ' ' * padding + '*' + text.center(width, ' ') + '*'
+            print(text_display)
 
     def draw_line(self, width=60, padding=8):
         print(' ' * padding + '* ' * width)
@@ -73,4 +76,7 @@ class PoleDrawing:
         # self.draw_line()
 
 
+# test = PoleDrawing()
+# test.display('Hello', reps=10)
+# print('newline')
 
