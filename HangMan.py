@@ -98,12 +98,11 @@ class HangMan(PoleDrawing, TextGeneration, Intro):
 
             print(4*'\n')
             self.draw_line()
-            self.display(' ')
-            self.display(' ')
-            self.display('Chicken!')
+            self.display(' ', reps=3)
+            self.display('C H I C K E N !')
             self.display(' ')
             self.display('Bye, bye! Go to your mommy!')
-            self.display(' ')
+            self.display(' ', reps=3)
             self.draw_line()
             exit()
 
