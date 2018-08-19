@@ -19,6 +19,7 @@ class TextGeneration:
             , "Enter a real letter, you illiterate basterd before we hang you real quick!"
             , "Play like a real man! Enter a legit letter!"]
 
+
     def right_guess(self):
         import random
         self.text = random.choice(self.right_guessing)
@@ -32,7 +33,7 @@ class TextGeneration:
         self.text = random.choice(self.wrong_guessing)
         return self.text
 
-    def win(self):
+    def winning(self):
         import random
         self.text = random.choice(self.win_message)
         return self.text

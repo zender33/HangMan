@@ -1,6 +1,8 @@
 from PoleDraw import PoleDrawing
 from text import TextGeneration
 from Intro import Intro
+
+
 class HangMan(PoleDrawing, TextGeneration, Intro):
 
     def __init__(self):
@@ -11,6 +13,17 @@ class HangMan(PoleDrawing, TextGeneration, Intro):
         self.wordpick = ''
         self.masked_word = []
         self.used_letters = []
+        self.menu_choice = ''
+        self.win = False
+
+    def reset(self):
+        self.wrong_guesses = 0
+        self.wordpick = ''
+        self.masked_word = []
+        self.used_letters = []
+        self.menu_choice = ''
+        self.win = False
+
 
     def word_pick(self):
         import random
@@ -60,12 +73,60 @@ class HangMan(PoleDrawing, TextGeneration, Intro):
         self.display(' ')
         self.draw_line()
 
-    def game(self):
+    def intro_logo_draw(self):
         self.draw_line()
         self.intro()
         self.draw_line()
 
-        while self.wrong_guesses < 6:
+    def menu(self, scenario='new'):
+        if scenario == "new":
+            self.display("Are you ready to die cowboy!!!")
+        elif scenario == "repeat":
+            self.display('Do you dare to try again?!!!')
+        self.display(' ')
+        self.display('1. A real cowboy is never scared!')
+        self.display('2. No! I am going home!')
+        self.draw_line()
+        a = input("What is your choice? ".rjust(78))
+
+        self.menu_choice = a
+
+        if self.menu_choice == '1':
+            self.game()
+
+        elif self.menu_choice == '2':
+
+            print(4*'\n')
+            self.draw_line()
+            self.display(' ')
+            self.display(' ')
+            self.display('Chicken!')
+            self.display(' ')
+            self.display('Bye, bye! Go to your mommy!')
+            self.display(' ')
+            self.draw_line()
+            exit()
+
+        else:
+                print(4 * '\n')
+                self.draw_line()
+                self.display(' ')
+                self.display('Enter a valid choice! ')
+                self.display(' ')
+                self.draw_line()
+                self.menu()
+
+    def start(self):
+
+        self.intro_logo_draw()
+        self.menu()
+
+    def game(self):
+        self.word()
+        print(self.wordpick)
+        self.game_display()
+
+        while self.wrong_guesses < 6 and self.win is False:
 
             letter_input = input('Please Enter a letter: '.rjust(78))
 
@@ -86,6 +147,8 @@ class HangMan(PoleDrawing, TextGeneration, Intro):
                     if letter_input.upper() == self.wordpick[i].upper():
                         self.masked_word[i] = letter_input.upper()
 
+                if self.wordpick.upper() == ''.join(self.masked_word).upper():
+                    self.win = True
 
             else:
                 self.wrong_guess()
@@ -94,18 +157,45 @@ class HangMan(PoleDrawing, TextGeneration, Intro):
 
             self.game_display()
 
+        if self.win == 1:
 
+            print(4 * '\n')
+            self.draw_line()
+            self.display(' ')
+            self.display(' ')
+            self.display(' Y O U   W O N !')
+            self.display(' ')
+            self.display(' ')
+            self.display(self.winning())
+            self.display(' ')
+            self.display(' ')
+            self.display(' ')
+            self.display(' ')
+            self.draw_line()
 
+        else:
+            print(4 * '\n')
+            self.draw_line()
+            self.display(' ')
+            self.display(' ')
+            self.display(' G A M E   O V E R !')
+            self.display(' ')
+            self.display(' ')
+            self.display(self.lost())
+            self.display(' ')
+            self.display('The word was: ' + self.wordpick)
+            self.display(' ')
+            self.display(' ')
+            self.draw_line()
 
+        self.reset()
+        self.menu('repeat')
 
 test = HangMan()
 
-test.word()
+
+test.start()
 print(test.wordpick)
-
-
-test.game()
-
 
 
 
