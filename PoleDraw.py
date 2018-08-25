@@ -74,9 +74,3 @@ class PoleDrawing:
             self.display(j)
 
         # self.draw_line()
-
-
-# test = PoleDrawing()
-# test.display('Hello', reps=10)
-# print('newline')
-
